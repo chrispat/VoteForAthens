@@ -15,7 +15,7 @@ namespace WebDriverTest
         {
             RandomProportional rp = new RandomProportional();
 
-            Console.WriteLine("Will vote for Athens Drive until midnight 12/05/2018 on a 1 - 5 minute interval");
+            Console.WriteLine("Will vote for Athens Drive until midnight 12/05/2018 on a 0 - 1 minute interval");
             while (DateTime.Now != DateTime.Parse("12/05/2018 23:59:59"))
             {
                 IWebDriver chrome = new ChromeDriver();
@@ -29,9 +29,9 @@ namespace WebDriverTest
                 Thread.Sleep(2000);
                 chrome.Quit();
 
-                int waitMinutes = Convert.ToInt32(rp.NextDouble() * 5);
-                Console.WriteLine("Sleeping for {0} minutes", waitMinutes);
-                Thread.Sleep(waitMinutes * 60 * 1000);
+                Double waitMilliseconds = rp.NextDouble() * 60000;
+                Console.WriteLine("Sleeping for {0} milliseconds", waitMilliseconds);
+                Thread.Sleep(Convert.ToInt32(waitMilliseconds));
             }
         }
     }
